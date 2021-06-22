@@ -18,7 +18,7 @@ def add_element(element):
 
 
 def delete_element():
-    return warehouse.pop()
+    return warehouse.pop(0)
 
 
 async def producer():
