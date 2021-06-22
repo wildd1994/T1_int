@@ -43,11 +43,18 @@ async def consumer():
 
 
 async def main():
-    task1 = asyncio.create_task(producer())
-    task2 = asyncio.create_task(consumer())
+    # task1 = asyncio.create_task(producer())
+    # task2 = asyncio.create_task(consumer())
+    #
+    # await asyncio.gather(task1, task2)
+    tasks = []
+    for i in range(10):
+        task = asyncio.create_task(producer())
+        tasks.append(task)
+    for i in range(2):
+        task = asyncio.create_task(consumer())
+        tasks.append(task)
 
-    await asyncio.gather(task1, task2)
-
-
+    await asyncio.gather(*tasks)
 if __name__ == '__main__':
     asyncio.run(main())
